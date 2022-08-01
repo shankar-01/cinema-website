@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      ul {
+        list-style: none;
+        display: flex;
+        justify-content: end;
+        align-self: flex-start;
+      }
+      ul a {
+        text-decoration: none;
+        color: white;
+      }
+      ul li {
+        display: inline-block;
+        margin: 1em;
+      }
+      .active {
+        border-bottom: 0.3rem solid blue;
+        box-sizing: border-box;
+      }
+      #loginOrReg {
+        border-radius: 0.7rem;
+        background-color: blue;
+        color: white;
+      }
+    </style>
+  </head>
+  <body style="background-color: black">
+    <div id="nav" style="background-color: rgb(37, 36, 36)">
+      <img
+        src="https://cdn.worldvectorlogo.com/logos/oscar-event-management-2.svg"
+        alt="Company Logo"
+        style="width: 3em; height: 3em; float: left"
+      />
+      <ul>
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li>
+          <a href="loginOrReg.html">
+            <button id="loginOrReg">Login or Register</button></a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
