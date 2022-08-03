@@ -1,0 +1,25 @@
+{
+  "name": "we_project",
+  "version": "1.0.0",
+  "description": "this is semester project for web engineering course",
+  "main": "database.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shankar-01/cinema-website.git"
+  },
+  "author": "Shankar-01 and FizaFatima19",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shankar-01/cinema-website/issues"
+  },
+  "homepage": "https://github.com/shankar-01/cinema-website#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "mysql": "^2.18.1",
+    "node-fetch": "^3.2.10"
+  }
+}
