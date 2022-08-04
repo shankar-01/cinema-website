@@ -1,0 +1,41 @@
+.image {
+  width: 3em;
+  height: 3em;
+  float: left;
+}
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: end;
+  align-self: flex-start;
+}
+ul button {
+  text-decoration: none;
+  color: white;
+  background-color: transparent;
+}
+ul li {
+  display: inline-block;
+  margin: 1em;
+}
+ul .active {
+  border-bottom: 0.3rem solid blue;
+  box-sizing: border-box;
+}
+#loginOrReg {
+  border-radius: 0.7rem;
+  background-color: blue;
+  color: white;
+}
+.carousel .carousel-indicators li {
+  background-color: white;
+  height: 0.3em;
+  width: 1em;
+}
+.carousel .carousel-indicators li.active {
+  background-color: blue;
+  border-color: blue;
+}
+.carousel-caption {
+  font-size: smaller;
+}
