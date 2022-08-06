@@ -28,9 +28,49 @@ function Navbar() {
           <button>Contact Us</button>
         </li>
         <li>
-          <button id="loginOrReg">Login or Register</button>
+          <button id="loginOrReg" 
+          className="btn btn-info" 
+  data-toggle="modal" data-target="#myModal">Login or Register</button>
         </li>
       </ul>
+      <Modal />
     </div>
   );
+}
+function Modal(){
+  return (<div className="modal fade" id="myModal" role="dialog">
+  <div className="modal-dialog">
+
+    <div className="modal-content">
+      <div className="modal-header">
+        <button type="button" className="close" data-dismiss="modal">&times;</button>
+        <h4 className="modal-title" align="center">Login</h4>
+      </div>
+      <div className="modal-body">
+        <table align="center" width="80%">
+          <tr>
+            <td><input type="text" style={{
+              width:"100%", fontSize:"1.5em"}}
+            placeholder="Email or User Name"/></td>
+          </tr>
+          <br/>
+          <tr>
+            <td><input type="password" style={{
+              width:"100%", fontSize:"1.5em"}}
+            placeholder="Password"/></td>
+          </tr>
+          <br/>
+          <tr>
+            <td><input className="btn btn-info btn-block" type="button"
+            value="Login"/></td>
+          </tr>
+        </table>
+      </div>
+      <div className="modal-footer">
+        <p>Not a member yet? <a></a></p>
+      </div>
+    </div>
+    
+  </div>
+</div>);
 }
