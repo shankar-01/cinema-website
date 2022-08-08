@@ -1,11 +1,33 @@
 import "./homepage.css";
 import Crousel from "./Crousel.js";
+import MoviesPanel from "./MoviesPanel";
+import MovieDetail from "./MovieDetail";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
 export default function App() {
   document.body.style.backgroundColor = "black";
   return (
     <div className="App">
+      <Router>
       <Navbar />
-      <Crousel />
+      <Routes>
+          <Route path="/" element={<>
+          <Crousel />
+          <MoviesPanel />
+          </>}>
+          
+          </Route>
+          <Route 
+          path="details/:id"
+           element={<MovieDetail />}>
+          </Route>  
+        </Routes>
+      </Router>
     </div>
   );
 }
@@ -48,22 +70,25 @@ function Modal(){
       </div>
       <div className="modal-body">
         <table align="center" width="80%">
+          <tbody>
+            
           <tr>
             <td><input type="text" style={{
               width:"100%", fontSize:"1.5em"}}
             placeholder="Email or User Name"/></td>
           </tr>
-          <br/>
+          
           <tr>
             <td><input type="password" style={{
               width:"100%", fontSize:"1.5em"}}
             placeholder="Password"/></td>
           </tr>
-          <br/>
+          
           <tr>
             <td><input className="btn btn-info btn-block" type="button"
             value="Login"/></td>
           </tr>
+          </tbody>
         </table>
       </div>
       <div className="modal-footer">

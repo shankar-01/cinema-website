@@ -1,0 +1,13 @@
+#detail tr{
+    border-bottom: 0.3em solid whitesmoke;
+}
+#dp, #detail{
+    height: 50rem;
+}
+#youtubeCenter{
+    display: flex;
+    justify-content: center;
+}
+.vote{
+    background-color: goldenrod;
+}
