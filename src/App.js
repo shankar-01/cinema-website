@@ -8,7 +8,9 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+import About from "./About";
+import React from "react";
+import ContactUs from './ContactUs';
 export default function App() {
   document.body.style.backgroundColor = "black";
   return (
@@ -25,6 +27,14 @@ export default function App() {
           <Route 
           path="details/:id"
            element={<MovieDetail />}>
+          </Route>
+          <Route 
+          path="/about"
+           element={<About />}>
+          </Route>
+          <Route 
+          path="/contactus"
+           element={<ContactUs />}>
           </Route>  
         </Routes>
       </Router>
@@ -32,6 +42,7 @@ export default function App() {
   );
 }
 function Navbar() {
+  
   return (
     <div>
       <img
@@ -40,27 +51,30 @@ function Navbar() {
         alt="logo"
       />
       <ul>
-        <li className="active">
-          <button>Home</button>
+        <li className="active" 
+        >
+          <Link to="/"><button>Home</button></Link>
         </li>
-        <li>
-          <button>About</button>
+        <li >
+        <Link to="/about"><button>About</button></Link>
         </li>
-        <li>
-          <button>Contact Us</button>
+        <li >
+        <Link to="/contactus"><button>About</button></Link>
         </li>
         <li>
           <button id="loginOrReg" 
           className="btn btn-info" 
-  data-toggle="modal" data-target="#myModal">Login or Register</button>
+  data-toggle="modal" data-target="#login">Login or Register</button>
         </li>
       </ul>
-      <Modal />
+      <Login/>
+      <Registeration />
+      
     </div>
   );
 }
-function Modal(){
-  return (<div className="modal fade" id="myModal" role="dialog">
+function Login(){
+  return (<div className="modal fade" id="login" role="dialog">
   <div className="modal-dialog">
 
     <div className="modal-content">
@@ -69,7 +83,7 @@ function Modal(){
         <h4 className="modal-title" align="center">Login</h4>
       </div>
       <div className="modal-body">
-        <table align="center" width="80%">
+        <table align="center" width="80%" >
           <tbody>
             
           <tr>
@@ -92,10 +106,64 @@ function Modal(){
         </table>
       </div>
       <div className="modal-footer">
-        <p>Not a member yet? <a></a></p>
+        <p>Not a member yet? 
+          <a data-toggle="modal" 
+          data-target="#register">create account</a>
+        </p>
       </div>
     </div>
     
   </div>
 </div>);
+}
+function Registeration(){
+  return (
+    <div className="modal fade" id="register" role="dialog">
+  <div className="modal-dialog">
+
+    <div className="modal-content">
+      <div className="modal-header">
+        <button type="button" 
+        className="close" data-dismiss="modal">&times;</button>
+        <h4 className="modal-title" align="center">
+          Register</h4>
+      </div>
+      <div className="modal-body">
+      <table align="center" width="80%" >
+          <tbody>
+          <tr>
+            <td><input type="text" style={{
+              width:"100%", fontSize:"1.5em"}}
+            placeholder="Name"/></td>
+          </tr>
+          <tr>
+            <td><input type="text" style={{
+              width:"100%", fontSize:"1.5em"}}
+            placeholder="Email"/></td>
+          </tr>
+          
+          <tr>
+            <td><input type="password" style={{
+              width:"100%", fontSize:"1.5em"}}
+            placeholder="Password"/></td>
+          </tr>
+          <tr>
+            <td><input type="password" style={{
+              width:"100%", fontSize:"1.5em"}}
+            placeholder="Confirm Password"/></td>
+          </tr>
+          <tr>
+            <td><input className="btn btn-info btn-block" type="button"
+            value="Register"/></td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+    <div className="modal-footer">
+    <p>Already a member? <a data-dismiss="modal">Login</a></p>
+    </div>
+  </div>
+  </div>
+  </div>
+  )
 }
