@@ -2,6 +2,7 @@ import "./homepage.css";
 import Crousel from "./Crousel.js";
 import MoviesPanel from "./MoviesPanel";
 import MovieDetail from "./MovieDetail";
+import Footer from "./Footer";
 import {
   BrowserRouter as Router,
   Routes,
@@ -35,16 +36,19 @@ export default function App() {
           <Route 
           path="/contactus"
            element={<ContactUs />}>
-          </Route>  
+          </Route>
+          <Route path='/accout'
+          element={<Account/>}
+          ></Route>
         </Routes>
+        <Footer/>
       </Router>
     </div>
   );
 }
 function Navbar() {
-  
   return (
-    <div>
+    <div >
       <img
         src="https://cdn.worldvectorlogo.com/logos/oscar-event-management-2.svg"
         className="image"
@@ -53,13 +57,25 @@ function Navbar() {
       <ul>
         <li className="active" 
         >
-          <Link to="/"><button>Home</button></Link>
+          <Link to="/">
+              
+            <button>
+            <i class="fa fa-home"></i>
+              Home</button></Link>
         </li>
         <li >
-        <Link to="/about"><button>About</button></Link>
+        <Link to="/about">
+        
+          <button>
+          <i class="fa fa-info-circle"></i>
+            About</button></Link>
         </li>
         <li >
-        <Link to="/contactus"><button>About</button></Link>
+        <Link to="/contactus">
+        
+        <button>
+        <i class="fa fa-send"></i>
+          Contact Us</button></Link>
         </li>
         <li>
           <button id="loginOrReg" 

@@ -1,5 +1,6 @@
 import {useParams} from 'react-router-dom'
 import YouTube from 'react-youtube'
+import DateFormater from './DateFormater'
 import './movieDetail.css'
 export default function MovieDetail(){
     
@@ -89,7 +90,7 @@ movie.image_url} id="dp"/>
                             <h4>Schedule</h4>
                             </td>
                             <td>
-                            <h4>{movie.schedule}
+                            <h4>{DateFormater(movie.schedule)}
     <button className='btn btn-primary'
     style={{float:"right"}}
     >Book</button>

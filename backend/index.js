@@ -37,6 +37,30 @@ app.get('/api/weekly', (req, res) => {
   })
   
 })
+app.post('/api/login', (req, res)=>{
+  const mail = req.body._id;
+  const password = req.body.password;
+  db.collection('users').find({_id:mail, 
+    password:password})
+  .toArray(function(err, result){
+    res.send(result);
+  })
+
+});
+app.post("/api/register", (req, res)=>{
+  db.collection("users")
+  .insertOne(req.body, function(err, respo){
+    if(err){
+      console.log("error")
+      res.send(false)
+    }
+    else{
+      console.log('added')
+      res.send(true)
+    }
+    
+  })
+})
 app.get('/api/comingSoon', (req, res) => {
     
   db.collection("movies").find()

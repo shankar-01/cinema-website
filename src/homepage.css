@@ -18,9 +18,16 @@ ul li {
   display: inline-block;
   margin: 1em;
 }
-ul .active {
-  border-bottom: 0.3rem solid blue;
-  box-sizing: border-box;
+
+#partners{
+  display: flex;
+  justify-content: space-around;
+}
+#partners img{
+  filter: grayscale(70%);
+}
+#partners img:hover{
+  filter: grayscale(0%);
 }
 #loginOrReg {
   border-radius: 0.7rem;

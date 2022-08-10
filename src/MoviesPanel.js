@@ -3,6 +3,7 @@ import axios from "axios";
 import YouTube from "react-youtube";
 import ReactDOM from "react-dom/client";
 import { Link } from "react-router-dom";
+import DateFormater from "./DateFormater";
 export default function MoviesPanel() {
     const [movies, setMovies] = useState([]);
     const [comingSoon, setComingSoon] = useState([]);
@@ -56,9 +57,9 @@ export default function MoviesPanel() {
         <div className="row">
           {comingSoon.map((movie, i) => {
             const m = JSON.stringify(movie)
-            sessionStorage.setItem(i, m);
+            sessionStorage.setItem('c'+i, m);
             return (
-              <Link to={`/details/${i}`}>
+              <Link to={`/details/c${i}`}>
             <MovieCard
               key={i}
               movie = {movie}
@@ -99,7 +100,7 @@ export default function MoviesPanel() {
             <p>
               Schedule-{" "}
               <span className="badge badge-primary">
-                {movie.schedule}</span>
+                {DateFormater(movie.schedule)}</span>
             </p>
           </div>
         </div>
