@@ -75,6 +75,14 @@ app.put("/api/register", (req, res)=>{
     
   })
 })
+app.put('/api/transaction', (req, res)=>{
+  const {email} = req.body
+  db.collection('booking').find({
+    email:email
+  }).toArray(function(err, result){
+    res.send(result)
+  })
+})
 app.put('/api/movieDetail', (req, res)=>{
   const id = req.body._id
   
@@ -85,6 +93,38 @@ app.put('/api/movieDetail', (req, res)=>{
     })
     res.send(result);
   })
+})
+app.put('/api/book', (req, res)=>{
+    const {email} = req.body
+    const {movieId} = req.body
+    db.collection("booking").find({email:email,
+    movieId:movieId}).toArray(function(err, result){
+      
+      if(result[0]){
+        
+        db.collection("booking").updateOne({email:email,
+          movieId:movieId},
+          {$set:{
+            count: result[0].count + req.body.count
+          }}
+          ).then(()=>{
+            res.send("update")
+          })
+          
+      }
+      else{
+        db.collection("booking").insertOne(
+          req.body, function(err, respo){
+            if(!err){
+              res.send("added")
+            }
+            else{
+              res.send("error occured")
+            }
+          })
+        
+      }
+    })
 })
 app.get('/api/comingSoon', (req, res) => {
     
