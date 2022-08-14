@@ -1,7 +1,7 @@
 import db from "./dbConnection.js"
 import express from 'express'
 import cors from 'cors'
-
+import { ObjectId } from "mongodb"
 
 const app = express()
 const port = 4000
@@ -11,6 +11,13 @@ app.get('/api/top3', (req, res) => {
     
     db.collection("movies").find()
     .sort({vote_average:-1})
+    .project({
+      _id:1,
+      title:1,
+      image_url:1,
+      overview:1,
+      schedule:1
+    })
     .toArray(function(err, result){
       const result1 = result.filter(function(movie){
         const diff = new Date(movie.schedule)
@@ -25,7 +32,14 @@ app.get('/api/top3', (req, res) => {
 
 
 app.get('/api/weekly', (req, res) => {
-  db.collection("movies").find()
+  db.collection("movies").find().project({
+    _id:1,
+    title:1,
+    release_date:1,
+    vote_average:1,
+    image_url:1,
+    schedule:1
+  })
   .toArray(function(err, result){
     result = result.filter(function(movie){
       const diff = new Date(movie.schedule)
@@ -37,7 +51,7 @@ app.get('/api/weekly', (req, res) => {
   })
   
 })
-app.post('/api/login', (req, res)=>{
+app.put('/api/login', (req, res)=>{
   const mail = req.body._id;
   const password = req.body.password;
   db.collection('users').find({_id:mail, 
@@ -47,7 +61,7 @@ app.post('/api/login', (req, res)=>{
   })
 
 });
-app.post("/api/register", (req, res)=>{
+app.put("/api/register", (req, res)=>{
   db.collection("users")
   .insertOne(req.body, function(err, respo){
     if(err){
@@ -61,9 +75,27 @@ app.post("/api/register", (req, res)=>{
     
   })
 })
+app.put('/api/movieDetail', (req, res)=>{
+  const id = req.body._id
+  
+  db.collection("movies").find()
+  .toArray(function(err, result){
+    result = result.find((movie)=>{
+      return movie._id == id;
+    })
+    res.send(result);
+  })
+})
 app.get('/api/comingSoon', (req, res) => {
     
-  db.collection("movies").find()
+  db.collection("movies").find().project({
+    _id:1,
+    title:1,
+    release_date:1,
+    vote_average:1,
+    image_url:1,
+    schedule:1
+  })
   .sort({vote_average:-1})
   .toArray(function(err, result){
     const result1 = result.filter(function(movie){

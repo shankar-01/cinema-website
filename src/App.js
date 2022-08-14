@@ -3,6 +3,7 @@ import Crousel from "./Crousel.js";
 import MoviesPanel from "./MoviesPanel";
 import MovieDetail from "./MovieDetail";
 import Footer from "./Footer";
+import ReactDOM from 'react-dom/client';
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,14 +11,27 @@ import {
   Link
 } from "react-router-dom";
 import About from "./About";
-import React from "react";
+import React, { useState } from "react";
 import ContactUs from './ContactUs';
+import Account from "./Account";
+import axios from "axios";
 export default function App() {
+  window.BeforeUnloadEvent = ()=>{
+    localStorage.removeItem("cinema-account")
+  }
+  
+  const [account, setAccount] = useState(()=>{
+    if(localStorage.getItem("cinema-account"))
+      return true;
+    })
+  const accountSet = (val)=>{
+    setAccount(val)
+  }
   document.body.style.backgroundColor = "black";
   return (
     <div className="App">
       <Router>
-      <Navbar />
+      <Navbar account={account}/>
       <Routes>
           <Route path="/" element={<>
           <Crousel />
@@ -26,7 +40,7 @@ export default function App() {
           
           </Route>
           <Route 
-          path="details/:id"
+          path="details/:i"
            element={<MovieDetail />}>
           </Route>
           <Route 
@@ -37,16 +51,19 @@ export default function App() {
           path="/contactus"
            element={<ContactUs />}>
           </Route>
-          <Route path='/accout'
+          <Route path='/account'
           element={<Account/>}
           ></Route>
         </Routes>
         <Footer/>
       </Router>
+      <Login fn={accountSet}/>
+      <Registeration />
     </div>
   );
 }
-function Navbar() {
+function Navbar(prop) {
+  
   return (
     <div >
       <img
@@ -60,36 +77,69 @@ function Navbar() {
           <Link to="/">
               
             <button>
-            <i class="fa fa-home"></i>
+            <i className="fa fa-home"></i>
               Home</button></Link>
         </li>
         <li >
         <Link to="/about">
         
           <button>
-          <i class="fa fa-info-circle"></i>
+          <i className="fa fa-info-circle"></i>
             About</button></Link>
         </li>
         <li >
         <Link to="/contactus">
         
         <button>
-        <i class="fa fa-send"></i>
-          Contact Us</button></Link>
+          Contact Us<i className="fa fa-send"></i>
+          </button></Link>
+        
         </li>
         <li>
-          <button id="loginOrReg" 
-          className="btn btn-info" 
-  data-toggle="modal" data-target="#login">Login or Register</button>
+          {!prop.account?
+    <button id="loginOrReg" 
+            className="btn btn-info"
+    data-toggle="modal" data-target="#login">Login or Register</button>:
+    <Link to="/account">
+    <button id="loginOrReg" 
+    className="btn btn-info">
+    <i className="fa fa-user"></i>
+    </button>
+    </Link>
+    }
+          
+          
+          
         </li>
       </ul>
-      <Login/>
-      <Registeration />
+      
       
     </div>
   );
 }
-function Login(){
+function Login(prop){
+  const login = async ()=>{
+    const email = document
+    .getElementById("loginEmail").value;
+    const pass = document
+    .getElementById("loginPass").value;
+
+    const {data} = await axios
+    .put('http://localhost:4000/api/login', 
+    {
+      _id:email
+      ,password:pass
+    })
+    if(data[0]){
+      alert("Login Successfull")
+      prop.fn(true)
+      localStorage.setItem("cinema-account", 
+      JSON.stringify(data[0]))
+    }
+    else{
+      alert("Check Email and Password!")
+    }
+  }
   return (<div className="modal fade" id="login" role="dialog">
   <div className="modal-dialog">
 
@@ -99,24 +149,31 @@ function Login(){
         <h4 className="modal-title" align="center">Login</h4>
       </div>
       <div className="modal-body">
-        <table align="center" width="80%" >
+        <table align="center" width="80%"
+        height="250rem" >
           <tbody>
             
           <tr>
             <td><input type="text" style={{
               width:"100%", fontSize:"1.5em"}}
-            placeholder="Email or User Name"/></td>
+            placeholder="Email"
+            id="loginEmail"
+            /></td>
           </tr>
           
           <tr>
             <td><input type="password" style={{
               width:"100%", fontSize:"1.5em"}}
-            placeholder="Password"/></td>
+            placeholder="Password"
+            id="loginPass"
+            /></td>
           </tr>
           
           <tr>
             <td><input className="btn btn-info btn-block" type="button"
-            value="Login"/></td>
+            value="Login"
+            onClick={login}
+            /></td>
           </tr>
           </tbody>
         </table>
@@ -133,6 +190,53 @@ function Login(){
 </div>);
 }
 function Registeration(){
+  const validate = (mail)=>{
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return true;
+  }
+    return false;
+  }
+  const register = async ()=>{
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const pass = document.getElementById('pass').value
+    const cpass = document.getElementById('cpass').value
+    
+    if(validate(email)){
+      if(name.length>0){
+        if(pass == cpass){
+          if(pass.length==0){
+            alert("Enter Password")
+            return;
+          }
+        const {data} = await axios
+      .put('http://localhost:4000/api/register',
+      {
+        _id:email,
+        password:pass,
+        name:name
+      })
+      if(data){
+        alert("Account Created Successfully")
+        
+      }
+      else{
+        alert("Error Occured. You are already member.")
+      }
+        }
+        else{
+          alert('Confirm password did not match.')
+        }
+      }
+      else{
+        alert("Enter name")
+      }
+    }
+    else{
+      alert("insert valid email!")
+    }
+  }
   return (
     <div className="modal fade" id="register" role="dialog">
   <div className="modal-dialog">
@@ -145,32 +249,43 @@ function Registeration(){
           Register</h4>
       </div>
       <div className="modal-body">
-      <table align="center" width="80%" >
+      <table align="center" width="80%" 
+      height="250rem">
           <tbody>
           <tr>
             <td><input type="text" style={{
               width:"100%", fontSize:"1.5em"}}
-            placeholder="Name"/></td>
+            placeholder="Name"
+            id="name"
+            /></td>
           </tr>
           <tr>
             <td><input type="text" style={{
               width:"100%", fontSize:"1.5em"}}
-            placeholder="Email"/></td>
+            placeholder="Email"
+            id="email"
+            /></td>
           </tr>
           
           <tr>
             <td><input type="password" style={{
               width:"100%", fontSize:"1.5em"}}
-            placeholder="Password"/></td>
+            placeholder="Password"
+            id="pass"
+            /></td>
           </tr>
           <tr>
             <td><input type="password" style={{
               width:"100%", fontSize:"1.5em"}}
-            placeholder="Confirm Password"/></td>
+            placeholder="Confirm Password"
+            id="cpass"
+            /></td>
           </tr>
           <tr>
             <td><input className="btn btn-info btn-block" type="button"
-            value="Register"/></td>
+            value="Register" onClick={register}
+            data-dismiss="modal"
+            /></td>
           </tr>
           </tbody>
         </table>

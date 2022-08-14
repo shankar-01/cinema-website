@@ -12,10 +12,10 @@ export default function Footer(){
                     <tr>
                         <td>
                         <p>
-                            <i class="fa fa-phone"></i>
+                            <i className="fa fa-phone"></i>
                             +923000123000</p>
                         <p>
-                        <i class="fa fa-envelope"></i>
+                        <i className="fa fa-envelope"></i>
                             cinema@support.com</p>
                         </td>
                         <td>
@@ -25,15 +25,15 @@ export default function Footer(){
                         </td>
                         <td>
                             <Link to='/'>
-                            <i class="fa fa-home"></i>    
+                            <i className="fa fa-home"></i>    
                             Home </Link>
                             <br/>
                             <Link to='/about'>
-                            <i class="fa fa-info-circle"></i>
+                            <i className="fa fa-info-circle"></i>
                             About </Link>
                             <br/>
                             <Link to='/contactus'>
-                            <i class=
+                            <i className=
                             "fa fa-send"></i>
                             Contact Us</Link>
                         </td>

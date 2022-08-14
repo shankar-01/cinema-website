@@ -33,10 +33,12 @@ export default function MoviesPanel() {
         <br />
         <div className="row">
           {movies.map((movie, i) => {
-            const m = JSON.stringify(movie)
-            sessionStorage.setItem(i, m);
+            
+            
             return (
-              <Link to={`/details/${i}`}>
+              <Link to={`/details/${movie._id}`}
+              key={i}
+              >
             <MovieCard
               key={i}
               movie = {movie}
@@ -56,10 +58,10 @@ export default function MoviesPanel() {
         <br />
         <div className="row">
           {comingSoon.map((movie, i) => {
-            const m = JSON.stringify(movie)
-            sessionStorage.setItem('c'+i, m);
             return (
-              <Link to={`/details/c${i}`}>
+              <Link to={`/details/${movie._id}`}
+              key={i}
+              >
             <MovieCard
               key={i}
               movie = {movie}

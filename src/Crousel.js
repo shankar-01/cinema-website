@@ -102,7 +102,6 @@ export default function Crousel() {
         </div> */}
         {
           movies.map((movie, i)=>{
-      sessionStorage.setItem("t"+i,JSON.stringify(movie))
           return( 
             
           <CrouselItem 
@@ -111,8 +110,8 @@ export default function Crousel() {
           +movie.image_url}
           movieName={movie.title}
           desc={movie.overview}
+          _id={movie._id}
           key={i}
-          index={i}
           />
           
           )
@@ -139,7 +138,7 @@ function CrouselItem(prop){
   return(
     
     <div className={prop.classNames}>
-          <Link to={`/details/t${prop.index}`}>
+          <Link to={`/details/${prop._id}`}>
           <img
             src={prop.src}
             alt={prop.movieName}
