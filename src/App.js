@@ -91,7 +91,8 @@ function Navbar(prop) {
         <Link to="/contactus">
         
         <button>
-          Contact Us<i className="fa fa-send"></i>
+        <i className="fa fa-send"></i>
+          Contact Us
           </button></Link>
         
         </li>
@@ -101,8 +102,9 @@ function Navbar(prop) {
             className="btn btn-info"
     data-toggle="modal" data-target="#login">Login or Register</button>:
     <Link to="/account">
-    <button id="loginOrReg" 
-    className="btn btn-info">
+    <button  
+    className="btn btn-primary" style={{
+      borderRadius: "50%"}}>
     <i className="fa fa-user"></i>
     </button>
     </Link>

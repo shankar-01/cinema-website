@@ -19,6 +19,24 @@ export default function MovieDetail() {
         return ()=>{ignore=true}
     }, [i, movie, setMovie])
     
+    const book = async ()=>{
+    const count = Number(window.prompt("Enter number of seats: ", "1"))
+    if(!localStorage.getItem("cinema-account")){
+        alert("Plaese Login First!")
+        return;
+    }
+    const email = JSON.parse(localStorage
+        .getItem("cinema-account"))._id
+    await axios
+    .put('http://localhost:4000/api/book',
+    { email: email,
+     movieId: movie._id,
+     count:count,
+     image_url: movie.image_url,
+     title: movie.title,
+     schedule : movie.schedule
+    })
+    }
     if(movie.genre)
         return (<>
 
@@ -104,9 +122,10 @@ export default function MovieDetail() {
                                     </td>
                                     <td>
                                         <h4>{DateFormater(movie.schedule)}
-                                            <button className='btn btn-primary'
-                                                style={{ float: "right" }}
-                                            >Book</button>
+<button className='btn btn-primary'
+style={{ float: "right" }}
+onClick={book}
+>Book</button>
                                         </h4>
 
                                     </td>
