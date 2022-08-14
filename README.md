@@ -6,17 +6,17 @@ This is my Web Engineering Course Project. Basically It is cinema website for us
 
 ## How to run project
 
-To start with project you need following tools:
-MongoDb
-Node.js
+To start with project you need following tools:<br/>
+MongoDb<br/>
+Node.js<br/>
 
-After statifying above requirements:
-Clone repository, extract it and open cmd
-Run `cd cinema-website`, to move inside project directory
-Run `npm install`, to install dependency for fronted
-Run `cd backend`, to move inside backend module of project
-Run `npm install`, to install dependency for backend
-Run `npm createDemoDB.js`, to create demo database
-Run `npx nodemon index.js`, to run backend server
-Run `cd ..`, to move inside fronted moldule
-Run `npm start`, to run react project
+After statifying above requirements:<br/>
+Clone repository, extract it and open cmd<br/>
+Run `cd cinema-website`, to move inside project directory<br/>
+Run `npm install`, to install dependency for fronted<br/>
+Run `cd backend`, to move inside backend module of project<br/>
+Run `npm install`, to install dependency for backend<br/>
+Run `npm createDemoDB.js`, to create demo database<br/>
+Run `npx nodemon index.js`, to run backend server<br/>
+Run `cd ..`, to move inside fronted moldule<br/>
+Run `npm start`, to run react project<br/>
