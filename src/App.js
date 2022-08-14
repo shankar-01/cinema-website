@@ -16,7 +16,7 @@ import ContactUs from './ContactUs';
 import Account from "./Account";
 import axios from "axios";
 export default function App() {
-  window.BeforeUnloadEvent = ()=>{
+  window.onbeforeunload = ()=>{
     localStorage.removeItem("cinema-account")
   }
   
