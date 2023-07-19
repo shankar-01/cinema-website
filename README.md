@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This is my Web Engineering Course Project. Basically It is cinema website for users. Here user can book see full schedule of movies and can book seats for movie. additionally In this project I have implemented login/register account functionality. And If user want to see the movies details such as trailer, rating, genre.etc. it can.
+Basically It is cinema website for users. Here user can book see full schedule of movies and can book seats for movie. additionally In this project I have implemented login/register account functionality. And If user want to see the movies details such as trailer, rating, genre.etc. it can.
 
 ## How to run project
 
